@@ -26,8 +26,9 @@ export class PhotosComponent implements OnInit, OnChanges {
 
   groupColumns(photos: Photo[]) {
     const newRows = [];
+
     for (let index = 0; index < photos.length; index += 3) {
-      newRows.push(photos.splice(index, index + 3));
+      newRows.push(photos.slice(index, index + 3));
     }
     return newRows;
   }
