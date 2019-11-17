@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { lowerCaseValidator } from 'src/app/shared/validators/lower-case.validator';
 import { UserNotTakenValidatorSerivice } from './user-not-taken.validator.service';
+import { NewUser } from './new-user';
+import { SingupService } from './singup.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-singup',
@@ -13,7 +16,9 @@ export class SingupComponent implements OnInit {
   singupForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder,
-    private userNotTakenValidatorService: UserNotTakenValidatorSerivice) { }
+    private userNotTakenValidatorService: UserNotTakenValidatorSerivice,
+    private singupService: SingupService,
+    private router: Router) { }
 
   ngOnInit() {
     this.singupForm = this.formBuilder.group({
@@ -30,7 +35,7 @@ export class SingupComponent implements OnInit {
           Validators.maxLength(40)
         ]
       ],
-      username: ['',
+      userName: ['',
         [
           Validators.required,
           lowerCaseValidator,
@@ -47,6 +52,16 @@ export class SingupComponent implements OnInit {
         ]
       ]
     });
+  }
+
+  singup() {
+    const newUser = this.singupForm.getRawValue() as NewUser;
+    this.singupService
+      .singup(newUser)
+      .subscribe(
+        () => this.router.navigate(['']),
+        err => console.log(err)
+      );
   }
 
 }

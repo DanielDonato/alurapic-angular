@@ -1,4 +1,4 @@
-<form [formGroup]="singupForm" class="form mt-4">
+<form [formGroup]="singupForm" class="form mt-4" (submit)="singup()">
     <div class="form-group">
         <input formControlName="email" class="form-control" placeholder="email" autofocus>
         <app-vmessage
@@ -28,28 +28,28 @@
     </div>
 
     <div class="form-group">
-        <input formControlName="username" class="form-control" placeholder="user name">
+        <input formControlName="userName" class="form-control" placeholder="user name">
         <app-vmessage
-            *ngIf="singupForm.get('username').errors?.required"
+            *ngIf="singupForm.get('userName').errors?.required"
             text="Username is required!">
         </app-vmessage>
         <app-vmessage
-            *ngIf="singupForm.get('username').errors?.minlength"
+            *ngIf="singupForm.get('userName').errors?.minlength"
             text="Minimum length is 2">
         </app-vmessage>
         <app-vmessage
-            *ngIf="singupForm.get('username').errors?.maxlength"
+            *ngIf="singupForm.get('userName').errors?.maxlength"
             text="Maximum length is 30">
         </app-vmessage>
         <app-vmessage
-            *ngIf="singupForm.get('username').errors?.lowerCase"
+            *ngIf="singupForm.get('userName').errors?.lowerCase"
             text="Must be lowercase">
         </app-vmessage>
         <app-vmessage
             text="Username already taken"
-            *ngIf="singupForm.get('username').errors?.userNameTaken">
+            *ngIf="singupForm.get('userName').errors?.userNameTaken">
         </app-vmessage>
-        <small *ngIf="singupForm.get('username').valid" class="text-success">User available</small>
+        <small *ngIf="singupForm.get('userName').valid" class="text-success">User available</small>
     </div>
 
     <div class="form-group">
