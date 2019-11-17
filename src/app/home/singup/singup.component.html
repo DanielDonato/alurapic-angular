@@ -45,6 +45,11 @@
             *ngIf="singupForm.get('username').errors?.lowerCase"
             text="Must be lowercase">
         </app-vmessage>
+        <app-vmessage
+            text="Username already taken"
+            *ngIf="singupForm.get('username').errors?.userNameTaken">
+        </app-vmessage>
+        <small *ngIf="singupForm.get('username').valid" class="text-success">User available</small>
     </div>
 
     <div class="form-group">
@@ -63,7 +68,7 @@
         </app-vmessage>
     </div>
 
-    <button class="btn btn-primary btn-block">Register</button>
+    <button [disabled]="singupForm.invalid || singupForm.pending" class="btn btn-primary btn-block">Register</button>
 
     <p>Already a user? <a [routerLink]="['']">Sign In!</a></p>
 </form>

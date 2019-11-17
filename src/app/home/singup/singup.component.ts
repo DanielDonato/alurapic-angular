@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { lowerCaseValidator } from 'src/app/shared/validators/lower-case.validator';
+import { UserNotTakenValidatorSerivice } from './user-not-taken.validator.service';
 
 @Component({
   selector: 'app-singup',
@@ -11,7 +12,8 @@ export class SingupComponent implements OnInit {
 
   singupForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder,
+    private userNotTakenValidatorService: UserNotTakenValidatorSerivice) { }
 
   ngOnInit() {
     this.singupForm = this.formBuilder.group({
@@ -34,7 +36,8 @@ export class SingupComponent implements OnInit {
           lowerCaseValidator,
           Validators.minLength(2),
           Validators.maxLength(30)
-        ]
+        ],
+        this.userNotTakenValidatorService.checkUserNameTaken()
       ],
       password: ['',
         [
