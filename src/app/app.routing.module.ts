@@ -5,22 +5,16 @@ import { PhotoListComponent } from "./photos/photo-list/photo-list.component";
 import { PhotoFormComponent } from "./photos/photo-form/photo-form.component";
 import { NotFoundComponent } from "./errors/not-found/not-found.component";
 import { PhotoListResolver } from "./photos/photo-list/photo-list.resolver";
-import { SignInComponent } from "./home/signin/signin.component";
-import { AuthGuard } from "./core/auth/auth.guard";
-import { SingupComponent } from "./home/singup/singup.component";
-import { HomeComponent } from "./home/home.component";
 
 const routes: Routes = [
     {
         path: '',
-        component: HomeComponent,
-        canActivate: [
-            AuthGuard
-        ],
-        children: [
-            {path: '', component: SignInComponent},
-            {path: 'singup', component: SingupComponent},
-        ]
+        pathMatch: 'full',
+        redirectTo: 'home'
+    },
+    {
+        path: 'home',
+        loadChildren: './home/home.module#HomeModule'
     },
     {path: 'user/:username', component: PhotoListComponent, resolve: {photos: PhotoListResolver}},
     {path: 'p/add', component: PhotoFormComponent},
@@ -30,6 +24,7 @@ const routes: Routes = [
 @NgModule({
     imports: [
         RouterModule.forRoot(routes) //forRoot => qualquer coisa dps de http://localhost:4200/
+        //RouterModule.forRoot(routes, { useHash: true }) => Ativar a navigação com #; exemplo: localhost:4200/#/home 
     ],
     exports: [RouterModule]
 })
