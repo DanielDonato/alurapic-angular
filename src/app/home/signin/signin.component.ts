@@ -23,6 +23,8 @@ export class SignInComponent implements OnInit {
             username: ['', Validators.required],
             password: ['', Validators.required]
         });
+        this.platformDetectorService.isPlatformBrowser() 
+        && this.usernameInput.nativeElement.focus();
     }
 
     login() {

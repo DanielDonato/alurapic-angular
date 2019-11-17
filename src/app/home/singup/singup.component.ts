@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { lowerCaseValidator } from 'src/app/shared/validators/lower-case.validator';
 import { UserNotTakenValidatorSerivice } from './user-not-taken.validator.service';
 import { NewUser } from './new-user';
 import { SingupService } from './singup.service';
 import { Router } from '@angular/router';
+import { PlatformDetectorService } from 'src/app/core/platform-detector/platform-detector.service';
 
 @Component({
   selector: 'app-singup',
@@ -14,11 +15,14 @@ import { Router } from '@angular/router';
 export class SingupComponent implements OnInit {
 
   singupForm: FormGroup;
+  @ViewChild('emailInput') 
+  emailInput: ElementRef<HTMLInputElement>;
 
   constructor(private formBuilder: FormBuilder,
     private userNotTakenValidatorService: UserNotTakenValidatorSerivice,
     private singupService: SingupService,
-    private router: Router) { }
+    private router: Router,
+    private platformDetectorService: PlatformDetectorService) { }
 
   ngOnInit() {
     this.singupForm = this.formBuilder.group({
@@ -52,6 +56,8 @@ export class SingupComponent implements OnInit {
         ]
       ]
     });
+    this.platformDetectorService.isPlatformBrowser() 
+    && this.emailInput.nativeElement.focus();
   }
 
   singup() {

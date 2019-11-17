@@ -13,7 +13,7 @@ export class PhotoService {
         return this.http.get<Photo[]>(`http://localhost:3000/${username}/photos`);
     }
 
-    
+
     listFromUserPaginated(username: string, page: number): Observable<Photo[]> {
         const params = new HttpParams()
             .append('page', page.toString());

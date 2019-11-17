@@ -8,10 +8,20 @@ import { PhotoListResolver } from "./photos/photo-list/photo-list.resolver";
 import { SignInComponent } from "./home/signin/signin.component";
 import { AuthGuard } from "./core/auth/auth.guard";
 import { SingupComponent } from "./home/singup/singup.component";
+import { HomeComponent } from "./home/home.component";
 
 const routes: Routes = [
-    {path: '', component: SignInComponent, canActivate: [AuthGuard]},
-    {path: 'singup', component: SingupComponent, canActivate: [AuthGuard]},
+    {
+        path: '',
+        component: HomeComponent,
+        canActivate: [
+            AuthGuard
+        ],
+        children: [
+            {path: '', component: SignInComponent},
+            {path: 'singup', component: SingupComponent},
+        ]
+    },
     {path: 'user/:username', component: PhotoListComponent, resolve: {photos: PhotoListResolver}},
     {path: 'p/add', component: PhotoFormComponent},
     {path: '**', component: NotFoundComponent} // ** qualquer outra rota que nao seja as listadas
