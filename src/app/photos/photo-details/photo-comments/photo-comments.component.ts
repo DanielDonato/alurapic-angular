@@ -3,6 +3,7 @@ import { PhotoComment } from '../../photo/photo-comment';
 import { Observable } from 'rxjs';
 import { PhotoService } from '../../photo/photo.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { switchMap, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-photo-comments',
@@ -30,10 +31,10 @@ export class PhotoCommentsComponent implements OnInit {
 
   save() {
     const comment = this.commentForm.get('comment').value as string;
-    this.photoService.addComment(this.photoId, comment)
-      .subscribe(() => {
+    this.comments$ = this.photoService.addComment(this.photoId, comment)
+      .pipe(switchMap(() => this.photoService.getComments(this.photoId))) // switchMap troca o observable atual para o chamado no metodo
+      .pipe(tap(() => { // tap => faz algo antes de retornar o observable
         this.commentForm.reset();
-        alert('Commentario adicionado com sucesso')
-      });
+      }));
   }
 }
