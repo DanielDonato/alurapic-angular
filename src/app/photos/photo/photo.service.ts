@@ -1,8 +1,9 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { Observable, of, throwError } from "rxjs";
 import { Injectable } from "@angular/core";
 import { Photo } from "./photo";
 import { PhotoComment } from "./photo-comment";
+import { map, catchError } from "rxjs/operators";
 
 const API_URL = "http://localhost:3000"
 
@@ -47,5 +48,15 @@ export class PhotoService {
 
     removePhoto(photoId: number) {
         return this.http.delete(`${API_URL}/photos/${photoId}`);
+    }
+
+    like(photoId: number) {
+        return this.http.post<Boolean>(`${API_URL}/photos/${photoId}/like`, {},
+            {observe: 'response'}) //{observe: 'response'} pega os dados da response
+            .pipe(map(res => true))
+            .pipe(catchError(err => {
+                return err.status == '304' ? of(false) : throwError(err);
+                //of => cria um novo observable; throwError => Continua executando o erro
+            }));
     }
 }
