@@ -18,11 +18,18 @@ const routes: Routes = [
         path: 'home',
         loadChildren: './home/home.module#HomeModule'
     },
-    {path: 'user/:username', component: PhotoListComponent, resolve: {photos: PhotoListResolver}},
-    {path: 'p/add', component: PhotoFormComponent, canActivate: [AuthGuard]},
-    {path: 'p/:photoId', component: PhotoDetailsComponent},
-    {path: 'not-found', component: NotFoundComponent},
-    {path: '**', redirectTo: 'not-found'} // ** qualquer outra rota que nao seja as listadas
+    {
+        path: 'user/:username',
+        component: PhotoListComponent,
+        resolve: {photos: PhotoListResolver},
+        data: {
+            title: 'Timeline'
+        }
+    },
+    {path: 'p/add', component: PhotoFormComponent, canActivate: [AuthGuard], data: {title: 'Photo Upload'}},
+    {path: 'p/:photoId', component: PhotoDetailsComponent, data: {title: 'Photo Detail'}},
+    {path: 'not-found', component: NotFoundComponent, data: {title: 'Not Found'}},
+    {path: '**', redirectTo: 'not-found', data: {title: 'Not Found'}} // ** qualquer outra rota que nao seja as listadas
 ];
 
 @NgModule({

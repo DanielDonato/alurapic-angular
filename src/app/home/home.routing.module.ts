@@ -13,8 +13,8 @@ const routes: Routes = [
             LoginGuard
         ],
         children: [
-            {path: '', component: SignInComponent},
-            {path: 'singup', component: SingupComponent},
+            {path: '', component: SignInComponent, data: {title: 'Sign In'}},
+            {path: 'singup', component: SingupComponent, data: {title: 'Sign Up'}},
         ]
     },
 ];
