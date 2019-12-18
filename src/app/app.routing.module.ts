@@ -7,6 +7,7 @@ import { NotFoundComponent } from "./errors/not-found/not-found.component";
 import { PhotoListResolver } from "./photos/photo-list/photo-list.resolver";
 import { AuthGuard } from "./core/auth/auth.guard";
 import { PhotoDetailsComponent } from "./photos/photo-details/photo-details.component";
+import { GlobalErrorComponent } from "./errors/global-error/global-error.component";
 
 const routes: Routes = [
     {
@@ -29,6 +30,7 @@ const routes: Routes = [
     {path: 'p/add', component: PhotoFormComponent, canActivate: [AuthGuard], data: {title: 'Photo Upload'}},
     {path: 'p/:photoId', component: PhotoDetailsComponent, data: {title: 'Photo Detail'}},
     {path: 'not-found', component: NotFoundComponent, data: {title: 'Not Found'}},
+    {path: 'error', component: GlobalErrorComponent, data: {title: 'Error'}},
     {path: '**', redirectTo: 'not-found', data: {title: 'Not Found'}} // ** qualquer outra rota que nao seja as listadas
 ];
 
