@@ -2,11 +2,11 @@
     <div class="form-group">
         <input #emailInput formControlName="email" class="form-control" placeholder="email" autofocus>
         <app-vmessage
-            *ngIf="singupForm.get('email').errors?.required && form.submited"
+            *ngIf="singupForm.get('email').errors?.required && (form.submited || singupForm.get('email').touched)"
             text="Email is required!">
         </app-vmessage>
         <app-vmessage
-            *ngIf="singupForm.get('email').errors?.email && form.submited"
+            *ngIf="singupForm.get('email').errors?.email && (form.submited || singupForm.get('email').touched)"
             text="Invalid e-mail">
         </app-vmessage>
     </div>
@@ -14,15 +14,15 @@
     <div class="form-group">
         <input formControlName="fullName" class="form-control" placeholder="full name">
         <app-vmessage
-            *ngIf="singupForm.get('fullName').errors?.required && form.submited"
+            *ngIf="singupForm.get('fullName').errors?.required && (form.submited || singupForm.get('fullName').touched)"
             text="Full name is required!">
         </app-vmessage>
         <app-vmessage
-            *ngIf="singupForm.get('fullName').errors?.minlength && form.submited"
+            *ngIf="singupForm.get('fullName').errors?.minlength && (form.submited || singupForm.get('fullName').touched)"
             text="Minimum length is 2">
         </app-vmessage>
         <app-vmessage
-            *ngIf="singupForm.get('fullName').errors?.maxlength && form.submited"
+            *ngIf="singupForm.get('fullName').errors?.maxlength && (form.submited || singupForm.get('fullName').touched)"
             text="Maximum length is 40">
         </app-vmessage>
     </div>
@@ -30,19 +30,19 @@
     <div class="form-group">
         <input formControlName="userName" class="form-control" placeholder="user name">
         <app-vmessage
-            *ngIf="singupForm.get('userName').errors?.required && form.submited"
+            *ngIf="singupForm.get('userName').errors?.required && (form.submited || singupForm.get('userName').touched)"
             text="Username is required!">
         </app-vmessage>
         <app-vmessage
-            *ngIf="singupForm.get('userName').errors?.minlength && form.submited"
+            *ngIf="singupForm.get('userName').errors?.minlength && (form.submited || singupForm.get('userName').touched)"
             text="Minimum length is 2">
         </app-vmessage>
         <app-vmessage
-            *ngIf="singupForm.get('userName').errors?.maxlength && form.submited"
+            *ngIf="singupForm.get('userName').errors?.maxlength && (form.submited || singupForm.get('userName').touched)"
             text="Maximum length is 30">
         </app-vmessage>
         <app-vmessage
-            *ngIf="singupForm.get('userName').errors?.lowerCase && form.submited"
+            *ngIf="singupForm.get('userName').errors?.lowerCase && (form.submited || singupForm.get('userName').touched)"
             text="Must be lowercase">
         </app-vmessage>
         <app-vmessage
@@ -55,20 +55,20 @@
     <div class="form-group">
         <input formControlName="password" type="password" class="form-control" placeholder="password">
         <app-vmessage
-            *ngIf="singupForm.get('password').errors?.required && form.submited"
+            *ngIf="singupForm.get('password').errors?.required && (form.submited || singupForm.get('password').touched)"
             text="Password is required!">
         </app-vmessage>
         <app-vmessage
-            *ngIf="singupForm.get('password').errors?.minlength && form.submited"
+            *ngIf="singupForm.get('password').errors?.minlength && (form.submited || singupForm.get('password').touched)"
             text="Minimum length is 8">
         </app-vmessage>
         <app-vmessage
-            *ngIf="singupForm.get('password').errors?.maxlength && form.submited"
+            *ngIf="singupForm.get('password').errors?.maxlength && (form.submited || singupForm.get('password').touched)"
             text="Maximum length is 14">
         </app-vmessage>
     </div>
 
-    <button class="btn btn-primary btn-block">Register</button>
+    <button type="submit" class="btn btn-primary btn-block">Register</button>
 
     <p>Already a user? <a [routerLink]="['']">Sign In!</a></p>
 </form>
