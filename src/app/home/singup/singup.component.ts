@@ -62,13 +62,15 @@ export class SingupComponent implements OnInit {
   }
 
   singup() {
-    const newUser = this.singupForm.getRawValue() as NewUser;
-    this.singupService
-      .singup(newUser)
-      .subscribe(
-        () => this.router.navigate(['']),
-        err => console.log(err)
-      );
+    if (this.singupForm.valid && !this.singupForm.pending) {
+        const newUser = this.singupForm.getRawValue() as NewUser;
+        this.singupService
+        .singup(newUser)
+        .subscribe(
+          () => this.router.navigate(['']),
+          err => console.log(err)
+          );
+      }
   }
 
 }
