@@ -6,6 +6,7 @@ import { NewUser } from './new-user';
 import { SingupService } from './singup.service';
 import { Router } from '@angular/router';
 import { PlatformDetectorService } from 'src/app/core/platform-detector/platform-detector.service';
+import { userNamePasswordValidator } from './username-password.validator';
 
 @Component({
   selector: 'app-singup',
@@ -56,6 +57,8 @@ export class SingupComponent implements OnInit {
           Validators.maxLength(14)
         ]
       ]
+    }, {
+      validator:userNamePasswordValidator
     });
     this.platformDetectorService.isPlatformBrowser() 
     && this.emailInput.nativeElement.focus();
