@@ -24,7 +24,8 @@ export class SingupComponent implements OnInit {
     private userNotTakenValidatorService: UserNotTakenValidatorSerivice,
     private singupService: SingupService,
     private router: Router,
-    private platformDetectorService: PlatformDetectorService) { }
+    private platformDetectorService: PlatformDetectorService
+    ) { }
 
   ngOnInit() {
     this.singupForm = this.formBuilder.group({
